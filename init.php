@@ -10,7 +10,7 @@ function i_autoload($className)
     if (is_int(strripos($className, '..'))) {
         return;
     }
-    $file = ROOT . 'lib/' . $className . '.php';
+    $file = ROOT . 'lib/' . ucfirst($className) . '.php';
     if (file_exists($file)) {
         include $file;
     }

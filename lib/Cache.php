@@ -16,7 +16,7 @@ class Cache
         
         list($type, $config) = explode(':', self::$type, 2);
 
-        $type = unfirst($type) . 'Store';
+        $type = ucfirst($type) . 'Store';
         if (in_array($type, array('FilecacheStore', 'MemcacheStore', 'SecacheStore', 'RedisStore'))) {
             $file = str_replace("\\", "/", dirname(__FILE__)) . '/Store/'.$type.'.php';
             if ($type == 'SecacheStore') {
