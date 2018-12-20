@@ -27,11 +27,11 @@
 		  <h4>允许上传文件类型</h4>
 		  <input class="mdui-textfield-input" type="text" name="exts" value="<?php echo join(' ', $config['exts']);?>"/>
 		</div>
-	   <Br>
+	   <br>
 	   <button type="submit" class="mdui-btn mdui-color-theme-accent mdui-ripple mdui-float-right">
 	   	<i class="mdui-icon material-icons">&#xe161;</i> 保存
 	   </button>
-	   <Br>
+	   <br>
 	</form>
 </div>
 <?php View::end('content');?>

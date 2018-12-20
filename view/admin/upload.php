@@ -108,7 +108,4 @@
 	</div>
 	
 </div>
-<script>
-$('button[name=refresh]').on('click',function(){$('center').html('正在重建缓存，请耐心等待...');});
-</script>
 <?php View::end('content');?>

@@ -3,25 +3,25 @@ define('VIEW_PATH', ROOT.'view/admin/');
 class AdminController
 {
     public static $default_config = array(
-      'site_name' =>'OneIndex',
-      'password' => 'oneindex',
-      'style'=>'material',
-      'onedrive_root' =>'',
-      'cache_type'=>'secache',
-      'cache_expire_time' => 3600,
-      'cache_refresh_time' => 600,
-      'root_path' => '?',
-      'show'=> array(
-        'stream'=>['txt'],
-        'image' => ['bmp','jpg','jpeg','png','gif'],
-        'video5'=>['mp4','webm','mkv'],
-        'video'=>[],
-        'video2'=>['avi','mpg', 'mpeg', 'rm', 'rmvb', 'mov', 'wmv', 'asf', 'ts', 'flv'],
-        'audio'=>['ogg','mp3','wav'],
-        'code'=>['html','htm','php', 'css', 'go','java','js','json','txt','sh','md'],
-        'doc'=>['csv','doc','docx','odp','ods','odt','pot','potm','potx','pps','ppsx','ppsxm','ppt','pptm','pptx','rtf','xls','xlsx']
-      ),
-      'images'=>['home'=>false,'public'=>false, 'exts'=>['jpg','png','gif','bmp']]
+        'site_name' =>'OneIndex',
+        'password' => 'oneindex',
+        'style' => 'material',
+        'onedrive_root' => '',
+        'cache_type' => 'secache',
+        'cache_expire_time' => 3600,
+        'cache_refresh_time' => 600,
+        'root_path' => '?',
+        'show'=> array(
+            'stream' => ['txt'],
+            'image' => ['bmp','jpg','jpeg','png','gif'],
+            'video5' => ['mp4','webm','mkv'],
+            'video' => [],
+            'video2' => ['avi','mpg', 'mpeg', 'rm', 'rmvb', 'mov', 'wmv', 'asf', 'ts', 'flv'],
+            'audio' => ['ogg','mp3','wav'],
+            'code' => ['html','htm','php', 'css', 'go','java','js','json','txt','sh','md'],
+            'doc' => ['csv','doc','docx','odp','ods','odt','pot','potm','potx','pps','ppsx','ppsxm','ppt','pptm','pptx','rtf','xls','xlsx']
+        ),
+        'images'=>['home'=>false,'public'=>false, 'exts'=>['jpg','png','gif','bmp']]
     );
     
     public function __construct()
