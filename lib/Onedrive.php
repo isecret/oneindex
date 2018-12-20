@@ -91,7 +91,7 @@
             self::dir_next_page($request, $items);
             //不在列表显示的文件夹
             $hide_list = explode(PHP_EOL, config('onedrive_hide'));
-            if (is_array($hide_list) && count($hide_list)>0) {
+            if (is_array($hide_list) && count($hide_list)>0 && array_filter($hide_list)) {
                 foreach ($hide_list as $hide_dir) {
                     foreach ($items as $key=>$_array) {
                         if (stristr($key, trim($hide_dir))) {
