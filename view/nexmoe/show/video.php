@@ -1,8 +1,8 @@
-<?php view::layout('layout')?>
+<?php View::layout('layout')?>
 <?php
-$item['thumb'] = onedrive::thumbnail($item['path']);
+$item['thumb'] = Onedrive::thumbnail($item['path']);
 ?>
-<?php view::begin('content');?>
+<?php View::begin('content');?>
 <link class="dplayer-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
 <script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
 <div class="mdui-container-fluid">
@@ -32,4 +32,4 @@ const dp = new DPlayer({
 });
 </script>
 <a href="<?php e($url);?>" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
-<?php view::end('content');?>
+<?php View::end('content');?>

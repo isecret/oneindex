@@ -23,7 +23,7 @@
 			<!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">refresh</i></a>-->
 		</div>
 		</div>
-    	<?php view::section('content');?>
+    	<?php View::section('content');?>
   	</div>
 </body>
 </html>

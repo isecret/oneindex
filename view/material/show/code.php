@@ -1,4 +1,4 @@
-<?php view::layout('layout')?>
+<?php View::layout('layout')?>
 <?php 
     function code_type($ext)
     {
@@ -20,7 +20,7 @@
 
     $content = IndexController::get_content($item);
 ?>
-<?php view::begin('content');?>
+<?php View::begin('content');?>
 <style type="text/css" media="screen">
     #editor { 
         /*height:800px;*/
@@ -51,4 +51,4 @@
         maxLines: Infinity
     });
 </script>
-<?php view::end('content');?>
+<?php View::end('content');?>

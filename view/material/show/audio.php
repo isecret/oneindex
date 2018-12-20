@@ -1,6 +1,6 @@
-<?php view::layout('layout')?>
+<?php View::layout('layout')?>
 
-<?php view::begin('content');?>
+<?php View::begin('content');?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 <div class="mdui-container-fluid">
 	<br>
@@ -33,4 +33,4 @@ const ap = new APlayer({
 });
 </script>
 
-<?php view::end('content');?>
+<?php View::end('content');?>

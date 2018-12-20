@@ -32,15 +32,15 @@ class AdminController
     {
         if (!empty($_POST['password']) && $_POST['password'] == config('password')) {
             setcookie('admin', md5(config('password').config('refresh_token')));
-            return view::direct(get_absolute_path(dirname($_SERVER['SCRIPT_NAME'])).'?/admin/');
+            return View::direct(get_absolute_path(dirname($_SERVER['SCRIPT_NAME'])).'?/admin/');
         }
-        return view::load('login')->with('title', '系统管理');
+        return View::load('login')->with('title', '系统管理');
     }
 
     public function logout()
     {
         setcookie('admin', '');
-        return view::direct(get_absolute_path(dirname($_SERVER['SCRIPT_NAME'])).'?/login');
+        return View::direct(get_absolute_path(dirname($_SERVER['SCRIPT_NAME'])).'?/login');
     }
 
     public function settings()
@@ -68,7 +68,7 @@ class AdminController
 
         $config = config('@base');
 
-        return view::load('settings')->with('config', $config)->with('message', $message);
+        return View::load('settings')->with('config', $config)->with('message', $message);
     }
 
     /**
@@ -95,13 +95,13 @@ class AdminController
     public function cache()
     {
         if (!is_null($_POST['clear'])) {
-            cache::clear();
+            Cache::clear();
             $message = "清除缓存成功";
         } elseif (!is_null($_POST['refresh'])) {
-            oneindex::refresh_cache(get_absolute_path(config('onedrive_root')));
+            Oneindex::refresh_cache(get_absolute_path(config('onedrive_root')));
             $message = "重建缓存成功";
         }
-        return view::load('cache')->with('message', $message);
+        return View::load('cache')->with('message', $message);
     }
 
     public function images()
@@ -113,7 +113,7 @@ class AdminController
             config('images@base', $config);
         }
         $config = config('images@base');
-        return view::load('images')->with('config', $config);
+        return View::load('images')->with('config', $config);
         ;
     }
 
@@ -137,7 +137,7 @@ class AdminController
             'doc'=>'文档(doc)'
         ];
         $show = config('show');
-        return view::load('show')->with('names', $names)->with('show', $show);
+        return View::load('show')->with('names', $names)->with('show', $show);
     }
 
     public function setpass()
@@ -154,7 +154,7 @@ class AdminController
                 $message = "原密码错误，修改失败";
             }
         }
-        return view::load('setpass')->with('message', $message);
+        return View::load('setpass')->with('message', $message);
     }
     
     public function install()
@@ -179,7 +179,7 @@ class AdminController
         $check['config'] = is_writable(ROOT.'config/');
         $check['cache'] = is_writable(ROOT.'cache/');
 
-        return view::load('install/install_0')->with('title', '系统安装')
+        return View::load('install/install_0')->with('title', '系统安装')
                         ->with('check', $check);
     }
 
@@ -190,7 +190,7 @@ class AdminController
             config('client_secret', $_POST['client_secret']);
             config('client_id', $_POST['client_id']);
             config('redirect_uri', $_POST['redirect_uri']);
-            return view::direct('?step=2');
+            return View::direct('?step=2');
         }
         if ($_SERVER['HTTP_HOST'] == 'localhost') {
             $redirect_uri = 'http://'.$_SERVER['HTTP_HOST'].get_absolute_path(dirname($_SERVER['PHP_SELF']));
@@ -202,23 +202,23 @@ class AdminController
         $ru = "https://developer.microsoft.com/en-us/graph/quick-start?appID=_appId_&appName=_appName_&redirectUrl={$redirect_uri}&platform=option-php";
         $deepLink = "/quickstart/graphIO?publicClientSupport=false&appName=oneindex&redirectUrl={$redirect_uri}&allowImplicitFlow=false&ru=".urlencode($ru);
         $app_url = "https://apps.dev.microsoft.com/?deepLink=".urlencode($deepLink);
-        return view::load('install/install_1')->with('title', '系统安装')
+        return View::load('install/install_1')->with('title', '系统安装')
                         ->with('redirect_uri', $redirect_uri)
                         ->with('app_url', $app_url);
     }
 
     public function install_2()
     {
-        return view::load('install/install_2')->with('title', '系统安装');
+        return View::load('install/install_2')->with('title', '系统安装');
     }
 
     public function install_3()
     {
-        $data = onedrive::authorize($_GET['code']);
+        $data = Onedrive::authorize($_GET['code']);
         if (!empty($data['refresh_token'])) {
             config('refresh_token', $data['refresh_token']);
             config('@token', $data);
         }
-        return view::load('install/install_3')->with('refresh_token', $data['refresh_token']);
+        return View::load('install/install_3')->with('refresh_token', $data['refresh_token']);
     }
 }

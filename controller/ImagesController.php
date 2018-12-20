@@ -18,17 +18,17 @@ class ImagesController
             $content = file_get_contents($_FILES["file"]['tmp_name']);
             $remotepath =  'images/'.date('Y/m/d/').$this->generateRandomString(10).'/';
             $remotefile = $remotepath.$_FILES["file"]['name'];
-            $result = onedrive::upload(config('onedrive_root').$remotefile, $content);
+            $result = Onedrive::upload(config('onedrive_root').$remotefile, $content);
             
             if ($result) {
                 $root = get_absolute_path(dirname($_SERVER['SCRIPT_NAME'])).config('root_path');
                 $http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
                 $url = $_SERVER['HTTP_HOST'].$root.'/'.$remotefile.((config('root_path') == '?')?'&s':'?s');
                 $url = $http_type.str_replace('//', '/', $url);
-                view::direct($url);
+                View::direct($url);
             }
         }
-        return view::load('images/index');
+        return View::load('images/index');
     }
 
     public function is_image($file)

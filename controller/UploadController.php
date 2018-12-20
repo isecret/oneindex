@@ -20,7 +20,7 @@ class UploadController
             }
             $request = $this->task_request();
             $request['url'] = substr($request['url'], 0, -4).'run';
-            fetch::post($request);
+            Fetch::post($request);
         } elseif (!empty($_POST['begin_task'])) {
             $this->task($_POST['begin_task']);
         } elseif (!empty($_POST['delete_task'])) {
@@ -31,7 +31,7 @@ class UploadController
         }
         $uploading = config('@upload');
         $uploaded = array_reverse((array)config('@uploaded'));
-        return view::load('upload')->with('uploading', $uploading)->with('uploaded', $uploaded)->with('message', $message);
+        return View::load('upload')->with('uploading', $uploading)->with('uploaded', $uploaded)->with('message', $message);
     }
 
     //扫描文件夹，添加到任务队列
@@ -57,7 +57,7 @@ class UploadController
         $task = array(
             'localfile'=>$localfile,
             'remotepath' => $remotefile,
-            'filesize'=>onedrive::_filesize($localfile),
+            'filesize'=>Onedrive::_filesize($localfile),
             'upload_type'=>'web',
             'update_time'=>0,
         );
@@ -90,7 +90,7 @@ class UploadController
             }
             $runing = $runing +1;
             print $remotepath.PHP_EOL;
-            fetch::post($this->task_request($remotepath));
+            Fetch::post($this->task_request($remotepath));
             if ($runing > 5) {
                 break;
             }
@@ -101,7 +101,7 @@ class UploadController
             sleep(60);
             $request = $this->task_request();
             $request['url'] = substr($request['url'], 0, -4).'run';
-            fetch::get($request);
+            Fetch::get($request);
         }
     }
 
@@ -128,7 +128,7 @@ class UploadController
             return;
         }
         if ($task['filesize'] < 10485760) {
-            @onedrive::upload($task['remotepath'], file_get_contents($task['localfile']));
+            @Onedrive::upload($task['remotepath'], file_get_contents($task['localfile']));
             unset($uploads[$remotepath]);
                 
             config('@upload', (array)$uploads);
@@ -146,7 +146,7 @@ class UploadController
         
         //创建上传会话
         if (empty($task['url'])) {
-            $data = onedrive::create_upload_session($task['remotepath']);
+            $data = Onedrive::create_upload_session($task['remotepath']);
             if (!empty($data['uploadUrl'])) {
                 $task['url'] = $data['uploadUrl'];
                 $task['offset'] = 0;
@@ -162,7 +162,7 @@ class UploadController
         } else {
             $begin_time = microtime(true);
             set_time_limit(0);
-            $data = onedrive::upload_session($task['url'], $task['localfile'], $task['offset'], $task['length']);
+            $data = Onedrive::upload_session($task['url'], $task['localfile'], $task['offset'], $task['length']);
             if (!empty($data['nextExpectedRanges'])) {
                 //继续上传
                 $upload_time = microtime(true) - $begin_time;
@@ -182,9 +182,9 @@ class UploadController
             } else {
                 //失败，重新获取信息
                 echo "re get url";
-                $data = onedrive::upload_session_status($task['url']);
+                $data = Onedrive::upload_session_status($task['url']);
                 if (empty($data)|| $info['length']<100) {
-                    onedrive::delete_upload_session($task['url']);
+                    Onedrive::delete_upload_session($task['url']);
                     unset($task['url']);
                     config($task['remotepath'].'@upload', $task);
                 } elseif (!empty($data['nextExpectedRanges'])) {
@@ -196,7 +196,7 @@ class UploadController
             }
         }
         $request= $this->task_request($task['remotepath']);
-        $resp = fetch::post($request);
+        $resp = Fetch::post($request);
         //var_dump($resp);
     }
 }

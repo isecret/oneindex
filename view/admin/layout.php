@@ -60,10 +60,10 @@
 <a id="anchor-top"></a>
 
 <div class="mdui-container">
-	<?php view::section('content');?>
+	<?php View::section('content');?>
 </div>
 <script>
-	$("a[href='<?php echo'?'.(route::get_uri());?>']").addClass("mdui-text-color-blue");
+	$("a[href='<?php echo'?'.(Route::get_uri());?>']").addClass("mdui-text-color-blue");
   // 消息提示
   <?php echo (isset($message) && !empty($message)) ? "mdui.snackbar({position: 'right-top', message: '{$message}'});" : '';?>
 </script>

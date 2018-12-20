@@ -1,6 +1,6 @@
-<?php view::layout('install/layout')?>
+<?php View::layout('install/layout')?>
 
-<?php view::begin('content');?>
+<?php View::begin('content');?>
 	
 <div class="mdui-container-fluid">
 	<div class="mdui-typo">
@@ -65,4 +65,4 @@
 	<?php endif;?>
 </div>
 
-<?php view::end('content');?>
+<?php View::end('content');?>

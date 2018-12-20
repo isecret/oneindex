@@ -1,5 +1,5 @@
-<?php view::layout('layout')?>
+<?php View::layout('layout')?>
 
-<?php view::begin('content');?>
+<?php View::begin('content');?>
 	<div class="mdui-typo-display-4" style="margin: 100px auto;text-align: center;">404</div>
-<?php view::end('content');?>
+<?php View::end('content');?>

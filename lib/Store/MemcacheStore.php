@@ -1,5 +1,6 @@
 <?php 
-class memcache_
+
+class MemcacheStore
 {
     private $m;
     

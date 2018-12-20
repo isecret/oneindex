@@ -5,22 +5,22 @@ if (php_sapi_name() !== "cli") {
 require 'init.php';
 ini_set('memory_limit', '128M');
 
-class one
+class One
 {
     public static function cache_clear()
     {
-        cache::clear();
+        Cache::clear();
     }
 
     public static function cache_refresh()
     {
-        oneindex::refresh_cache(get_absolute_path(config('onedrive_root')));
+        Oneindex::refresh_cache(get_absolute_path(config('onedrive_root')));
     }
 
     public static function token_refresh()
     {
         $refresh_token = config('refresh_token');
-        $token = onedrive::get_token($refresh_token);
+        $token = Onedrive::get_token($refresh_token);
         if (!empty($token['refresh_token'])) {
             config('@token', $token);
         }
@@ -44,14 +44,14 @@ class one
         }
         print ' 远程文件：'.$remotepath.PHP_EOL;
         
-        $filesize = onedrive::_filesize($localfile) or die('无法获取文件大小');
+        $filesize = Onedrive::_filesize($localfile) or die('无法获取文件大小');
         if ($filesize < 10485760) {
             print ' 上传方式：直接上传'.PHP_EOL;
             $begin_time = microtime(true);
-            $result = onedrive::upload($remotepath, file_get_contents($localfile));
+            $result = Onedrive::upload($remotepath, file_get_contents($localfile));
             if (!empty($result)) {
                 $upload_time = microtime(true) - $begin_time;
-                print ' 上传成功:'.onedrive::human_filesize($filesize/$upload_time).'/s'.PHP_EOL;
+                print ' 上传成功:'.Onedrive::human_filesize($filesize/$upload_time).'/s'.PHP_EOL;
             } else {
                 print ' 上传失败!'.PHP_EOL;
             }
@@ -100,7 +100,7 @@ class one
     //        $task = array(
     //			'localfile'=>$localfile,
     //			'remotepath' => $remotepath,
-    //			'filesize'=>onedrive::_filesize($localfile),
+    //			'filesize'=>Onedrive::_filesize($localfile),
     //			'update_time'=>0
     //        );
     //        $uploads = config('@upload');
@@ -116,17 +116,17 @@ class one
 
     public static function upload_large_file($localfile, $remotepath)
     {
-        fetch::init([CURLOPT_TIMEOUT=>200]);
+        Fetch::init([CURLOPT_TIMEOUT=>200]);
         $upload = config('@upload');
         $info = $upload[$remotepath];
         if (empty($info['url'])) {
             print ' 创建上传会话'.PHP_EOL;
-            $data = onedrive::create_upload_session($remotepath);
+            $data = Onedrive::create_upload_session($remotepath);
             if (!empty($data['uploadUrl'])) {
                 $info['url'] = $data['uploadUrl'];
                 $info['localfile'] = $localfile;
                 $info['remotepath'] = $remotepath;
-                $info['filesize'] = onedrive::_filesize($localfile);
+                $info['filesize'] = Onedrive::_filesize($localfile);
                 $info['offset'] = 0;
                 $info['length'] = 327680;
                 $info['update_time'] = time();
@@ -144,15 +144,15 @@ class one
             return self::upload_large_file($localfile, $remotepath);
         }
         
-        print ' 上传分块'.onedrive::human_filesize($info['length']).'	';
+        print ' 上传分块'.Onedrive::human_filesize($info['length']).'	';
         $begin_time = microtime(true);
-        $data = onedrive::upload_session($info['url'], $info['localfile'], $info['offset'], $info['length']);
+        $data = Onedrive::upload_session($info['url'], $info['localfile'], $info['offset'], $info['length']);
 
         if (!empty($data['nextExpectedRanges'])) {
             $upload_time = microtime(true) - $begin_time;
             $info['speed'] = $info['length']/$upload_time;
             
-            print onedrive::human_filesize($info['speed']).'/s'.'	'.round(($info['offset']/$info['filesize'])*100).'%	'.PHP_EOL;
+            print Onedrive::human_filesize($info['speed']).'/s'.'	'.round(($info['offset']/$info['filesize'])*100).'%	'.PHP_EOL;
             $info['length'] = intval($info['length']/$upload_time/32768*2)*327680;
             $info['length'] = ($info['length']>104857600)?104857600:$info['length'];
             
@@ -168,9 +168,9 @@ class one
             return;
         } else {
             print ' 失败!'.PHP_EOL;
-            $data = onedrive::upload_session_status($info['url']);
+            $data = Onedrive::upload_session_status($info['url']);
             if (empty($data)|| $info['length']<100) {
-                onedrive::delete_upload_session($info['url']);
+                Onedrive::delete_upload_session($info['url']);
                 unset($upload[$remotepath]);
                 config('@upload', $upload);
             } elseif (!empty($data['nextExpectedRanges'])) {
@@ -190,8 +190,8 @@ class one
 array_shift($argv);
 $action = str_replace(':', '_', array_shift($argv));
 
-if (is_callable(['one',$action])) {
-    @call_user_func_array(['one',$action], $argv);
+if (is_callable(['One',$action])) {
+    @call_user_func_array(['One',$action], $argv);
     exit();
 }
 ?>

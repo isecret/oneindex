@@ -1,6 +1,6 @@
 <?php
 
-class sqlite implements \Countable
+class SQLite implements \Countable
 {
     /**
      * @var PDO

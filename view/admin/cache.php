@@ -1,4 +1,4 @@
-<?php view::layout('layout')?>
+<?php View::layout('layout')?>
 <?php 
 function getPHPExecutableFromPath()
 {
@@ -18,7 +18,7 @@ function getPHPExecutableFromPath()
 $php_path = getPHPExecutableFromPath();
 $script_path = $_SERVER['DOCUMENT_ROOT'].'/one.php';
 ?>
-<?php view::begin('content');?>
+<?php View::begin('content');?>
 <div class="mdui-container-fluid">
 
 	<div class="mdui-typo">
@@ -65,4 +65,4 @@ $('button[name=refresh]').on('click',function(){
 	});
 });
 </script>
-<?php view::end('content');?>
+<?php View::end('content');?>

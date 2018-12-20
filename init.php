@@ -68,7 +68,7 @@ if (!function_exists('config')) {
 
 // cache
 define('CACHE_PATH', ROOT.'cache/');
-cache::$type = empty(config('cache_type'))?'secache':config('cache_type');
+Cache::$type = empty(config('cache_type'))?'secache':config('cache_type');
 
 
 if (!function_exists('db')) {
@@ -81,7 +81,7 @@ if (!function_exists('db')) {
 if (!function_exists('view')) {
     function view($file, $set = null)
     {
-        return view::load($file, $set = null);
+        return View::load($file, $set = null);
     }
 }
 
@@ -152,6 +152,6 @@ function get_absolute_path($path)
 }
 
 !defined('CONTROLLER_PATH') && define('CONTROLLER_PATH', ROOT.'controller/');
-onedrive::$client_id = config('client_id');
-onedrive::$client_secret = config('client_secret');
-onedrive::$redirect_uri = config('redirect_uri');
+Onedrive::$client_id = config('client_id');
+Onedrive::$client_secret = config('client_secret');
+Onedrive::$redirect_uri = config('redirect_uri');

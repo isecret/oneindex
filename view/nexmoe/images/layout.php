@@ -21,7 +21,7 @@
 	</header>
 	
 	<div class="mdui-container">
-    	<?php view::section('content');?>
+    	<?php View::section('content');?>
   	</div>
 </body>
 </html>

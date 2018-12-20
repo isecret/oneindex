@@ -66,7 +66,7 @@ class IndexController
             return true;
         }
         $navs = $this->navs();
-        echo view::load('password')->with('navs', $navs);
+        echo View::load('password')->with('navs', $navs);
         exit();
     }
 
@@ -119,7 +119,7 @@ class IndexController
             //不在列表中展示
             unset($this->items['HEAD.md']);
         }
-        return view::load('list')->with('title', 'index of '. urldecode($this->url_path))
+        return View::load('list')->with('title', 'index of '. urldecode($this->url_path))
                     ->with('navs', $navs)
                     ->with('path', join("/", array_map("rawurlencode", explode("/", $this->url_path))))
                     ->with('root', $root)
@@ -138,14 +138,14 @@ class IndexController
         $data['ext'] = $ext;
         $data['item']['path'] = get_absolute_path($this->path).$this->name;
         $http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
-        $uri = onedrive::urlencode(get_absolute_path($this->url_path.'/'.$this->name));
+        $uri = Onedrive::urlencode(get_absolute_path($this->url_path.'/'.$this->name));
         $data['url'] = $http_type.$_SERVER['HTTP_HOST'].$root.$uri;
         
 
         $show = config('show');
         foreach ($show as $n=>$exts) {
             if (in_array($ext, $exts)) {
-                return view::load('show/'.$n)->with($data);
+                return View::load('show/'.$n)->with($data);
             }
         }
 
@@ -160,7 +160,7 @@ class IndexController
             //800 176 96
             $width = $height = 800;
         }
-        $item['thumb'] = onedrive::thumbnail($this->path.$this->name);
+        $item['thumb'] = Onedrive::thumbnail($this->path.$this->name);
         list($item['thumb'], $tmp) = explode('&width=', $item['thumb']);
         $item['thumb'] .= strpos($item['thumb'], '?')?'&':'?';
         return $item['thumb']."width={$width}&height={$height}";
@@ -169,8 +169,8 @@ class IndexController
     //文件夹下元素
     public function items($path, $fetch=false)
     {
-        $items = cache::get('dir_'.$this->path, function () {
-            return onedrive::dir($this->path);
+        $items = Cache::get('dir_'.$this->path, function () {
+            return Onedrive::dir($this->path);
         }, config('cache_expire_time'));
         return $items;
     }
@@ -194,8 +194,8 @@ class IndexController
 
     public static function get_content($item)
     {
-        $content = cache::get('content_'.$item['path'], function () use ($item) {
-            $resp = fetch::get($item['downloadUrl']);
+        $content = Cache::get('content_'.$item['path'], function () use ($item) {
+            $resp = Fetch::get($item['downloadUrl']);
             if ($resp->http_code == 200) {
                 return $resp->content;
             }
@@ -211,7 +211,7 @@ class IndexController
         }
 
         http_response_code(404);
-        view::load('404')->show();
+        View::load('404')->show();
         die();
     }
 

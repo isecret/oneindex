@@ -1,6 +1,6 @@
-<?php view::layout('layout')?>
+<?php View::layout('layout')?>
 
-<?php view::begin('content');?>
+<?php View::begin('content');?>
 	<iframe id="mask" src='<?php echo str_replace('transform/thumbnail?', 'transform/pdf?', $item['thumb']);?>' 
 		allowfullscreen="allowfullscreen"
         mozallowfullscreen="mozallowfullscreen"
@@ -27,4 +27,4 @@ $(function(){
       
 });  
 </script>
-<?php view::end('content');?>
+<?php View::end('content');?>

@@ -1,5 +1,6 @@
 <?php
-class route
+
+class Route
 {
     public static $uri;
     private static $method;

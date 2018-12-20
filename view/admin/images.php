@@ -1,6 +1,6 @@
-<?php view::layout('layout')?>
+<?php View::layout('layout')?>
 
-<?php view::begin('content');?>
+<?php View::begin('content');?>
 <div class="mdui-container-fluid">
 
 	<div class="mdui-typo">
@@ -34,4 +34,4 @@
 	   <Br>
 	</form>
 </div>
-<?php view::end('content');?>
+<?php View::end('content');?>

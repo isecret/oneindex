@@ -1,5 +1,6 @@
 <?php
-class fetch
+
+class Fetch
 {
     public static $headers = "User-Agent:Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36";
     public static $cookies;
@@ -29,8 +30,8 @@ class fetch
     }
 
     /**
-     * fetch::get('http://www.google.com/');
-     * fetch::post('http://www.google.com/', array('name'=>'foo'));
+     * Fetch::get('http://www.google.com/');
+     * Fetch::post('http://www.google.com/', array('name'=>'foo'));
      */
     public static function __callstatic($method, $args)
     {
@@ -87,7 +88,7 @@ class fetch
         $curl_opt[CURLOPT_HTTPHEADER] = $headers;
 
         // cookies
-        $request['cookies'] = empty($request['cookies']) ? fetch::$cookies : $request['cookies'];
+        $request['cookies'] = empty($request['cookies']) ? Fetch::$cookies : $request['cookies'];
         $cookies = empty($request['cookies']) ? $cookies : self::cookies_arr2str($request['cookies']);
         if (!empty($cookies)) {
             $curl_opt[CURLOPT_COOKIE] = $cookies;
@@ -112,10 +113,10 @@ class fetch
     {
         $response = (object) curl_getinfo($ch);
         $response->raw = $raw;
-        //$raw = fetch::iconv($raw, $response->content_type);
+        //$raw = Fetch::iconv($raw, $response->content_type);
         $response->headers = substr($raw, 0, $response->header_size);
-        $response->cookies = fetch::get_respone_cookies($response->headers);
-        fetch::$cookies = array_merge((array) fetch::$cookies, $response->cookies);
+        $response->cookies = Fetch::get_respone_cookies($response->headers);
+        Fetch::$cookies = array_merge((array) Fetch::$cookies, $response->cookies);
         $response->content = substr($raw, $response->header_size);
         return $response;
     }

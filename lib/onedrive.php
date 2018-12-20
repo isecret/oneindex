@@ -1,5 +1,5 @@
 <?php
-    class onedrive
+    class Onedrive
     {
         public static $client_id;
         public static $client_secret;
@@ -31,8 +31,8 @@
 
             $url = self::$oauth_url."/token";
             $post_data = "client_id={$client_id}&redirect_uri={$redirect_uri}&client_secret={$client_secret}&code={$code}&grant_type=authorization_code";
-            fetch::$headers = "Content-Type: application/x-www-form-urlencoded";
-            $resp = fetch::post($url, $post_data);
+            Fetch::$headers = "Content-Type: application/x-www-form-urlencoded";
+            $resp = Fetch::post($url, $post_data);
             $data = json_decode($resp->content, true);
             return $data;
         }
@@ -47,7 +47,7 @@
             $request['url'] = self::$oauth_url."/token";
             $request['post_data']  = "client_id={$client_id}&redirect_uri={$redirect_uri}&client_secret={$client_secret}&refresh_token={$refresh_token}&grant_type=refresh_token";
             $request['headers']= "Content-Type: application/x-www-form-urlencoded";
-            $resp = fetch::post($request);
+            $resp = Fetch::post($request);
             $data = json_decode($resp->content, true);
             return $data;
         }
@@ -106,7 +106,7 @@
         //通过分页获取页面所有item
         public static function dir_next_page($request, &$items, $retry=0)
         {
-            $resp = fetch::get($request);
+            $resp = Fetch::get($request);
             
             $data = json_decode($resp->content, true);
             if (empty($data) && $retry < 3) {
@@ -135,9 +135,9 @@
         
         //static function content($path){
         //	$token = self::access_token();
-        //	fetch::$headers = "Authorization: bearer {$token}";
+        //	Fetch::$headers = "Authorization: bearer {$token}";
         //	$url = self::$api_url."/me/drive/root:".self::urlencode($path).":/content";
-        //	$resp = fetch::get($url);
+        //	$resp = Fetch::get($url);
         //	return $resp->content;
         //}
 
@@ -145,7 +145,7 @@
         public static function thumbnail($path, $size='large')
         {
             $request = self::request($path, "thumbnails/0?select={$size}");
-            $resp = fetch::get($request);
+            $resp = Fetch::get($request);
             $data = json_decode($resp->content, true);
             $request = self::request($path, "thumbnails/0?select={$size}");
             return @$data[$size]['url'];
@@ -156,7 +156,7 @@
         {
             $request = self::request($path, "content");
             $request['post_data'] = $content;
-            $resp = fetch::put($request);
+            $resp = Fetch::put($request);
             $data = @json_decode($resp->content, true);
             return $data;
         }
@@ -169,7 +169,7 @@
             $post_data['name'] = pathinfo($path, PATHINFO_BASENAME);
             $post_data['file'] = json_decode("{}");
             $request['post_data'] = json_encode($post_data);
-            $resp = fetch::post($request);
+            $resp = Fetch::post($request);
             list($tmp, $location) = explode('ocation:', $resp->headers);
             list($location, $tmp) = explode(PHP_EOL, $location);
             return trim($location);
@@ -180,7 +180,7 @@
             $request = self::request($path, 'createUploadSession');
             $request['post_data'] = '{"item": {"@microsoft.graph.conflictBehavior": "fail"}}';
             $token = self::access_token();
-            $resp = fetch::post($request);
+            $resp = Fetch::post($request);
             $data = json_decode($resp->content, true);
             if ($resp->http_code == 409) {
                 return false;
@@ -202,7 +202,7 @@
             $request['headers'] .= "Content-Length: {$content_length}".PHP_EOL;
             $request['headers'] .= "Content-Range: bytes {$offset}-{$end}/{$file_size}";
             $request['post_data'] = $post_data;
-            $resp = fetch::put($request);
+            $resp = Fetch::put($request);
             $data = json_decode($resp->content, true);
             return $data;
         }
@@ -210,8 +210,8 @@
         public static function upload_session_status($url)
         {
             $token = self::access_token();
-            fetch::$headers = "Authorization: bearer {$token}".PHP_EOL."Content-Type: application/json".PHP_EOL;
-            $resp = fetch::get($url);
+            Fetch::$headers = "Authorization: bearer {$token}".PHP_EOL."Content-Type: application/json".PHP_EOL;
+            $resp = Fetch::get($url);
             $data = json_decode($resp->content, true);
             return $data;
         }
@@ -219,8 +219,8 @@
         public static function delete_upload_session($url)
         {
             $token = self::access_token();
-            fetch::$headers = "Authorization: bearer {$token}".PHP_EOL."Content-Type: application/json".PHP_EOL;
-            $resp = fetch::delete($url);
+            Fetch::$headers = "Authorization: bearer {$token}".PHP_EOL."Content-Type: application/json".PHP_EOL;
+            $resp = Fetch::delete($url);
             $data = json_decode($resp->content, true);
             return $data;
         }

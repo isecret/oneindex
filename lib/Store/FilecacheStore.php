@@ -1,5 +1,6 @@
 <?php 
-class filecache_
+
+class FilecacheStore
 {
     private $cache_path;
     

@@ -1,5 +1,5 @@
-<?php view::layout('layout')?>
-<?php view::begin('content');?>
+<?php View::layout('layout')?>
+<?php View::begin('content');?>
 <div class="mdui-container-fluid">
 
 	<div class="mdui-typo">
@@ -49,7 +49,7 @@
 		  <?php foreach ((array)$uploading as $i => $task):?>
 		      <tr>
 		        <td><?php echo $task['remotepath'];?></td>
-		        <td><?php echo onedrive::human_filesize($task['speed']).'/s';?></td>
+		        <td><?php echo Onedrive::human_filesize($task['speed']).'/s';?></td>
 		        <td><?php echo @floor($task['offset']/$task['filesize']*100).'%'; ?></td>
 		        <?php if ($task['update_time'] == 0):?>
 		        	<td>
@@ -111,4 +111,4 @@
 <script>
 $('button[name=refresh]').on('click',function(){$('center').html('正在重建缓存，请耐心等待...');});
 </script>
-<?php view::end('content');?>
+<?php View::end('content');?>

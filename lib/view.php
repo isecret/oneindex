@@ -1,6 +1,6 @@
 <?php
 !defined('VIEW_PATH') && define('VIEW_PATH', 'view/');
-class view
+class View
 {
     private $_view = array('file' => '', 'data' => array());
     public static $_pos = null;
@@ -13,7 +13,7 @@ class view
         }
         $file = str_replace('.', '/', $file);
 
-        return new view($file, $set);
+        return new View($file, $set);
     }
 
     public function __construct($file, $set = null)

@@ -24,13 +24,13 @@
 				<?php if (!empty($item['folder'])):?>
 					<tr>
 						<td class="file-name"><a class="icon icon-dir" href="<?php echo get_absolute_path($root.$path.rawurlencode($item['name']));?>"><?php echo $item['name'];?>/</a></td>
-						<td class="file-size"><?php echo onedrive::human_filesize($item['size']);?></td>
+						<td class="file-size"><?php echo Onedrive::human_filesize($item['size']);?></td>
 						<td class="file-date-modified"><?php echo date("Y-m-d H:i:s", $item['lastModifiedDateTime']);?></td>
 					</tr>
 				<?php else:?>
 					<tr>
 						<td class="file-name"><a class="icon icon-file" href="<?php echo get_absolute_path($root.$path).rawurlencode($item['name']);?>"><?php echo $item['name'];?></a></td>
-						<td class="file-size"><?php echo onedrive::human_filesize($item['size']);?></td>
+						<td class="file-size"><?php echo Onedrive::human_filesize($item['size']);?></td>
 						<td class="file-date-modified"><?php echo date("Y-m-d H:i:s", $item['lastModifiedDateTime']);?></td>
 					</tr>
 				<?php endif;?>

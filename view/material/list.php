@@ -1,4 +1,4 @@
-<?php view::layout('layout')?>
+<?php View::layout('layout')?>
 <?php 
 function file_ico($item)
 {
@@ -16,7 +16,7 @@ function file_ico($item)
 }
 ?>
 
-<?php view::begin('content');?>
+<?php View::begin('content');?>
 	
 <div class="mdui-container-fluid">
 
@@ -57,7 +57,7 @@ function file_ico($item)
 		    	<?php e($item['name']);?>
 			  </div>
 			  <div class="mdui-col-sm-3 mdui-text-right"><?php echo date("Y-m-d H:i:s", $item['lastModifiedDateTime']);?></div>
-			  <div class="mdui-col-sm-2 mdui-text-right"><?php echo onedrive::human_filesize($item['size']);?></div>
+			  <div class="mdui-col-sm-2 mdui-text-right"><?php echo Onedrive::human_filesize($item['size']);?></div>
 		  	</a>
 		</li>
 			<?php else:?>
@@ -68,7 +68,7 @@ function file_ico($item)
 		    	<?php e($item['name']);?>
 			  </div>
 			  <div class="mdui-col-sm-3 mdui-text-right"><?php echo date("Y-m-d H:i:s", $item['lastModifiedDateTime']);?></div>
-			  <div class="mdui-col-sm-2 mdui-text-right"><?php echo onedrive::human_filesize($item['size']);?></div>
+			  <div class="mdui-col-sm-2 mdui-text-right"><?php echo Onedrive::human_filesize($item['size']);?></div>
 		  	</a>
 		</li>
 			<?php endif;?>
@@ -138,4 +138,4 @@ $(function () {
 
 });
 </script>
-<?php view::end('content');?>
+<?php View::end('content');?>
