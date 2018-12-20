@@ -25,7 +25,7 @@
 		</div>
 		<div class="mdui-textfield">
 		  <h4>允许上传文件类型</h4>
-		  <input class="mdui-textfield-input" type="text" name="exts" value="<?php echo join(' ',$config['exts']);?>"/>
+		  <input class="mdui-textfield-input" type="text" name="exts" value="<?php echo join(' ', $config['exts']);?>"/>
 		</div>
 	   <Br>
 	   <button type="submit" class="mdui-btn mdui-color-theme-accent mdui-ripple mdui-float-right">

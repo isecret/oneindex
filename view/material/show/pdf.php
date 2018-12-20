@@ -1,7 +1,7 @@
 <?php view::layout('layout')?>
 
 <?php view::begin('content');?>
-	<iframe id="mask" src='<?php echo str_replace('transform/thumbnail?', 'transform/pdf?',$item['thumb']);?>' 
+	<iframe id="mask" src='<?php echo str_replace('transform/thumbnail?', 'transform/pdf?', $item['thumb']);?>' 
 		allowfullscreen="allowfullscreen"
         mozallowfullscreen="mozallowfullscreen"
         msallowfullscreen="msallowfullscreen"

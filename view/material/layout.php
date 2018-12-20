@@ -67,7 +67,7 @@
 	<header class="mdui-appbar mdui-color-theme">
 		<div class="mdui-toolbar mdui-container">
 			<a href="/" class="mdui-typo-headline"><?php e(config('site_name'));?></a>
-			<?php foreach((array)$navs as $n=>$l):?>
+			<?php foreach ((array)$navs as $n=>$l):?>
 			<i class="mdui-icon material-icons mdui-icon-dark" style="margin:0;">chevron_right</i>
 			<a href="<?php e($l);?>"><?php e($n);?></a>
 			<?php endforeach;?>

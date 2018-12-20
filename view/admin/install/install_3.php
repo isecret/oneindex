@@ -7,7 +7,7 @@
 	  <h1>系统安装 <small>完成安装</small></h1>
 	</div>
 
-<?php if($refresh_token):?>
+<?php if ($refresh_token):?>
 	<h1 class='mdui-text-color-green'>程序安装成功!</h1>
 	<br><br>
 	<a class="mdui-btn mdui-color-theme-accent mdui-ripple mdui-float-left" href="?/admin/" ><i class="mdui-icon material-icons">&#xe8b8;</i> 管理后台</a>(初始密码:oneindex)

@@ -1,19 +1,19 @@
 <?php view::layout('layout')?>
 <?php 
-function getPHPExecutableFromPath() {
-  $paths = explode(PATH_SEPARATOR, getenv('PATH'));
-  foreach ($paths as $path) {
-    if (strstr($path, 'php.exe') && isset($_SERVER["WINDIR"]) && file_exists($path) && is_file($path)) {
-        return $path;
-    }
-    else {
-        $php_executable = $path . DIRECTORY_SEPARATOR . "php" . (isset($_SERVER["WINDIR"]) ? ".exe" : "");
-        if (file_exists($php_executable) && is_file($php_executable)) {
-           return $php_executable;
+function getPHPExecutableFromPath()
+{
+    $paths = explode(PATH_SEPARATOR, getenv('PATH'));
+    foreach ($paths as $path) {
+        if (strstr($path, 'php.exe') && isset($_SERVER["WINDIR"]) && file_exists($path) && is_file($path)) {
+            return $path;
+        } else {
+            $php_executable = $path . DIRECTORY_SEPARATOR . "php" . (isset($_SERVER["WINDIR"]) ? ".exe" : "");
+            if (file_exists($php_executable) && is_file($php_executable)) {
+                return $php_executable;
+            }
         }
     }
-  }
-  return 'php'; // not found
+    return 'php'; // not found
 }
 $php_path = getPHPExecutableFromPath();
 $script_path = $_SERVER['DOCUMENT_ROOT'].'/one.php';

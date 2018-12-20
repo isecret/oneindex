@@ -11,7 +11,7 @@
 		<h1 id="heading">Index of <?php echo urldecode($path);?></h1>
 		<table id="table">
 			<tr><th class="file-name">Name</th><th class="file-size">Size</th><th class="file-date-created">Date Created</th><th class="file-date-modified">Date Modified</th></tr>
-			<?php if($path != '/'):?>
+			<?php if ($path != '/'):?>
 				<tr>
 					<td class="file-name">
 						<a class="icon icon-up" href="<?php echo get_absolute_path($root.$path.'../');?>">..</a>
@@ -20,8 +20,8 @@
 					<td class="file-date-modified"></td>
 				</tr>
 			<?php endif;?>
-			<?php foreach((array)$items as $item):?>
-				<?php if(!empty($item['folder'])):?>
+			<?php foreach ((array)$items as $item):?>
+				<?php if (!empty($item['folder'])):?>
 					<tr>
 						<td class="file-name"><a class="icon icon-dir" href="<?php echo get_absolute_path($root.$path.rawurlencode($item['name']));?>"><?php echo $item['name'];?>/</a></td>
 						<td class="file-size"><?php echo onedrive::human_filesize($item['size']);?></td>

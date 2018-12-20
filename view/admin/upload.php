@@ -46,19 +46,19 @@
 	    </thead>
 	    <tbody>
 		  <form action="" method="post">
-		  <?php foreach( (array)$uploading as $i => $task ):?>
+		  <?php foreach ((array)$uploading as $i => $task):?>
 		      <tr>
 		        <td><?php echo $task['remotepath'];?></td>
 		        <td><?php echo onedrive::human_filesize($task['speed']).'/s';?></td>
 		        <td><?php echo @floor($task['offset']/$task['filesize']*100).'%'; ?></td>
-		        <?php if( $task['update_time'] == 0 ):?>
+		        <?php if ($task['update_time'] == 0):?>
 		        	<td>
 			        	等待上传中
 		        	</td>
 		        	<td>
 			        	<button name="begin_task"  class="mdui-btn mdui-color-green-600 mdui-ripple" type="submit" name="remotepath" value="<?php echo $task['remotepath'];?>">上传</button>
 		        	</td>
-		        <?php elseif(time() > ($task['update_time']+60)):?>
+		        <?php elseif (time() > ($task['update_time']+60)):?>
 		        	<td>已暂停</td>
 		        	<td>
 			        	<button name="begin_task"  class="mdui-btn mdui-color-green-600 mdui-ripple" type="submit" name="remotepath" value="<?php echo $task['remotepath'];?>">上传</button>
@@ -98,7 +98,7 @@
 	      </tr>
 	    </thead>
 	    <tbody>
-		  <?php foreach( (array)$uploaded as $name => $status ):?>
+		  <?php foreach ((array)$uploaded as $name => $status):?>
 		      <tr>
 		        <td><?php echo $name;?></td>
 		        <td><?php echo $status;?></td>

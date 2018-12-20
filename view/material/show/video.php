@@ -18,7 +18,9 @@ $item['thumb'] = onedrive::thumbnail($item['path']);
 	  <textarea class="mdui-textfield-input"><video><source src="<?php e($url);?>" type="video/mp4"></video></textarea>
 	</div>
 </div>
-<?php if(pathinfo($item["name"], PATHINFO_EXTENSION) === 'flv') { e('<script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>'); } ?>
+<?php if (pathinfo($item["name"], PATHINFO_EXTENSION) === 'flv') {
+    e('<script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>');
+} ?>
 <script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
 <script>
 const dp = new DPlayer({

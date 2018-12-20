@@ -16,14 +16,14 @@
 		  <h4>网站风格<small></small></h4>
 		  <select name="style" class="mdui-select">
 			  <?php 
-				foreach(scandir(ROOT.'view') as $k=>$s){
-				    $styles[$k] = trim($s, '/');
-				}
-				$styles = array_diff($styles, [".", "..", "admin"]);
-				$style = config("style")?config("style"):'material';
-				$cache_type  = config("cache_type")?config("cache_type"):'secache';
-			 	foreach($styles as $style_name):
-			  ?>
+                foreach (scandir(ROOT.'view') as $k=>$s) {
+                    $styles[$k] = trim($s, '/');
+                }
+                $styles = array_diff($styles, [".", "..", "admin"]);
+                $style = config("style")?config("style"):'material';
+                $cache_type  = config("cache_type")?config("cache_type"):'secache';
+                foreach ($styles as $style_name):
+              ?>
 			  <option value ="<?php echo $style_name;?>" <?php echo ($style==$style_name)?'selected':'';?>><?php echo $style_name;?></option>
 			  <?php endforeach;?>
 		  </select>
@@ -51,8 +51,8 @@
 		  <h4>缓存类型<small></small></h4>
 		  <select name="cache_type" class="mdui-select">
 			  <?php 
-			 	foreach(['secache', 'filecache', 'memcache', 'redis'] as $type):
-			  ?>
+                foreach (['secache', 'filecache', 'memcache', 'redis'] as $type):
+              ?>
 			  <option value ="<?php echo $type;?>" <?php echo ($type==$cache_type)?'selected':'';?>><?php echo $type;?></option>
 			  <?php endforeach;?>
 		  </select>

@@ -2,11 +2,12 @@
 
 <?php 
 //仅支持教育版和企业版
-if(strpos($item['downloadUrl'],"sharepoint.com") == false){
-	header('Location: '.$item['downloadUrl']);exit();
+if (strpos($item['downloadUrl'], "sharepoint.com") == false) {
+    header('Location: '.$item['downloadUrl']);
+    exit();
 }
 $item['thumb'] = onedrive::thumbnail($item['path']);
-$mpd =  str_replace("thumbnail","videomanifest",$item['thumb'])."&part=index&format=dash&useScf=True&pretranscode=0&transcodeahead=0";
+$mpd =  str_replace("thumbnail", "videomanifest", $item['thumb'])."&part=index&format=dash&useScf=True&pretranscode=0&transcodeahead=0";
 ?>
 
 <?php view::begin('content');?>
