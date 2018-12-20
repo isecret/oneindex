@@ -1,6 +1,6 @@
-<?php view::layout('install/layout')?>
+<?php View::layout('install/layout')?>
 
-<?php view::begin('content');?>
+<?php View::begin('content');?>
 	
 <div class="mdui-container-fluid">
 	<div class="mdui-col-md-6 mdui-col-offset-md-3">
@@ -21,4 +21,4 @@
 	
 </div>
 
-<?php view::end('content');?>
+<?php View::end('content');?>

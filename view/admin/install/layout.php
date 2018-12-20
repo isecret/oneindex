@@ -67,7 +67,7 @@
 	<header class="mdui-appbar mdui-color-theme">
 		<div class="mdui-toolbar mdui-container">
 			<a href="/" class="mdui-typo-headline">OneIndex</a>
-			<?php foreach((array)$navs as $n=>$l):?>
+			<?php foreach ((array)$navs as $n=>$l):?>
 			<i class="mdui-icon material-icons mdui-icon-dark" style="margin:0;">chevron_right</i>
 			<a href="<?php e($l);?>"><?php e($n);?></a>
 			<?php endforeach;?>
@@ -76,7 +76,7 @@
 	</header>
 	
 	<div class="mdui-container">
-    	<?php view::section('content');?>
+    	<?php View::section('content');?>
   	</div>
 </body>
 </html>

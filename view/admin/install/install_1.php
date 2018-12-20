@@ -1,6 +1,6 @@
-<?php view::layout('install/layout')?>
+<?php View::layout('install/layout')?>
 
-<?php view::begin('content');?>
+<?php View::begin('content');?>
 	
 <div class="mdui-container-fluid">
 	<div class="mdui-typo">
@@ -32,7 +32,7 @@
 
 		<div class="mdui-textfield mdui-textfield-floating-label">
 		   <i class="mdui-icon material-icons">&#xe41a;</i>
-		   <?php if($redirect_uri == 'https://ju.tn/'):?>
+		   <?php if ($redirect_uri == 'https://ju.tn/'):?>
 		   <label class="mdui-textfield-label">由于你的网站不是<b>http://localhost/</b>。将通过ju.tn进行中转</label>
 		   <?php endif;?>
 		   <label class="mdui-textfield-label"><?php echo $redirect_uri;?></label>
@@ -48,4 +48,4 @@
 	
 </div>
 
-<?php view::end('content');?>
+<?php View::end('content');?>

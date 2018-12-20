@@ -1,6 +1,6 @@
-<?php view::layout('layout')?>
+<?php View::layout('layout')?>
 
-<?php view::begin('content');?>
+<?php View::begin('content');?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 <div class="mdui-container-fluid">
 	<br>
@@ -28,9 +28,9 @@ const ap = new APlayer({
         name: '<?php e(pathinfo($item["name"], PATHINFO_FILENAME)); ?>',
         artist: 'Oneindex Preview',
         url: '<?php e($item['downloadUrl']);?>',
-        cover: '<?php e( !empty($item['thumb'] ) ? $item['thumb'].'&width=176&height=176' : null);?>'
+        cover: '<?php e(!empty($item['thumb']) ? $item['thumb'].'&width=176&height=176' : null);?>'
     }]
 });
 </script>
 
-<?php view::end('content');?>
+<?php View::end('content');?>

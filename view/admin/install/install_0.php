@@ -1,6 +1,6 @@
-<?php view::layout('install/layout')?>
+<?php View::layout('install/layout')?>
 
-<?php view::begin('content');?>
+<?php View::begin('content');?>
 	
 <div class="mdui-container-fluid">
 	<div class="mdui-typo">
@@ -20,7 +20,7 @@
 	      <tr>
 	        <td>1</td>
 	        <td>PHP > 5.5</td>
-	        <?php if($check['php']): ?>
+	        <?php if ($check['php']): ?>
 	        <td><i class="mdui-icon material-icons" style="color:#4caf50;">&#xe5ca;</i></td>
 	        <?php else:?>
 	        <td><i class="mdui-icon material-icons" style="color:#f44336;">&#xe5cd;</i></td>
@@ -29,7 +29,7 @@
 	      <tr>
 	        <td>2</td>
 	        <td>curl 支持</td>
-	        <?php if($check['curl']): ?>
+	        <?php if ($check['curl']): ?>
 	        <td><i class="mdui-icon material-icons" style="color:#4caf50;">&#xe5ca;</i></td>
 	        <?php else:?>
 	        <td><i class="mdui-icon material-icons" style="color:#f44336;">&#xe5cd;</i></td>
@@ -38,7 +38,7 @@
 	      <tr>
 	        <td>3</td>
 	        <td>config/ 目录可读可写</td>
-	        <?php if($check['config']): ?>
+	        <?php if ($check['config']): ?>
 	        <td><i class="mdui-icon material-icons" style="color:#4caf50;">&#xe5ca;</i></td>
 	        <?php else:?>
 	        <td><i class="mdui-icon material-icons" style="color:#f44336;">&#xe5cd;</i></td>
@@ -47,7 +47,7 @@
 	      <tr>
 	        <td>4</td>
 	        <td>cache/ 目录可读可写</td>
-	        <?php if($check['cache']): ?>
+	        <?php if ($check['cache']): ?>
 	        <td><i class="mdui-icon material-icons" style="color:#4caf50;">&#xe5ca;</i></td>
 	        <?php else:?>
 	        <td><i class="mdui-icon material-icons" style="color:#f44336;">&#xe5cd;</i></td>
@@ -58,11 +58,11 @@
 	</div>
 	<br><br>
 	<!--<a class="mdui-btn mdui-color-theme-accent mdui-ripple mdui-float-left" href="?step=1">上一步</a>-->
-	<?php if(array_sum($check) == count($check)):?>
+	<?php if (array_sum($check) == count($check)):?>
 	<a class="mdui-btn mdui-color-theme-accent mdui-ripple mdui-float-right" href="?step=1">下一步</a>
 	<?php else:?>
 	<button class="mdui-btn mdui-btn-raised  mdui-float-right disabled" disabled>下一步</button>
 	<?php endif;?>
 </div>
 
-<?php view::end('content');?>
+<?php View::end('content');?>

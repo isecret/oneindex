@@ -1,6 +1,6 @@
-<?php view::layout('layout')?>
+<?php View::layout('layout')?>
 
-<?php view::begin('content');?>
+<?php View::begin('content');?>
 	
 <div class="mdui-container-fluid" style="padding-top: 100px;">
 
@@ -26,4 +26,4 @@
 
 </div>
 
-<?php view::end('content');?>
+<?php View::end('content');?>

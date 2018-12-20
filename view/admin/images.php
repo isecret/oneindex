@@ -1,6 +1,6 @@
-<?php view::layout('layout')?>
+<?php View::layout('layout')?>
 
-<?php view::begin('content');?>
+<?php View::begin('content');?>
 <div class="mdui-container-fluid">
 
 	<div class="mdui-typo">
@@ -25,13 +25,13 @@
 		</div>
 		<div class="mdui-textfield">
 		  <h4>允许上传文件类型</h4>
-		  <input class="mdui-textfield-input" type="text" name="exts" value="<?php echo join(' ',$config['exts']);?>"/>
+		  <input class="mdui-textfield-input" type="text" name="exts" value="<?php echo join(' ', $config['exts']);?>"/>
 		</div>
-	   <Br>
+	   <br>
 	   <button type="submit" class="mdui-btn mdui-color-theme-accent mdui-ripple mdui-float-right">
 	   	<i class="mdui-icon material-icons">&#xe161;</i> 保存
 	   </button>
-	   <Br>
+	   <br>
 	</form>
 </div>
-<?php view::end('content');?>
+<?php View::end('content');?>

@@ -1,25 +1,26 @@
-<?php view::layout('layout')?>
+<?php View::layout('layout')?>
 <?php 
-function file_ico($item){
-  $ext = strtolower(pathinfo($item['name'], PATHINFO_EXTENSION));
-  if(in_array($ext,['bmp','jpg','jpeg','png','gif'])){
-  	return "image";
-  }
-  if(in_array($ext,['mp4','mkv','webm','avi','mpg', 'mpeg', 'rm', 'rmvb', 'mov', 'wmv', 'mkv', 'asf'])){
-  	return "ondemand_video";
-  }
-  if(in_array($ext,['ogg','mp3','wav'])){
-  	return "audiotrack";
-  }
-  return "insert_drive_file";
+function file_ico($item)
+{
+    $ext = strtolower(pathinfo($item['name'], PATHINFO_EXTENSION));
+    if (in_array($ext, ['bmp','jpg','jpeg','png','gif'])) {
+        return "image";
+    }
+    if (in_array($ext, ['mp4','mkv','webm','avi','mpg', 'mpeg', 'rm', 'rmvb', 'mov', 'wmv', 'mkv', 'asf'])) {
+        return "ondemand_video";
+    }
+    if (in_array($ext, ['ogg','mp3','wav'])) {
+        return "audiotrack";
+    }
+    return "insert_drive_file";
 }
 ?>
 
-<?php view::begin('content');?>
+<?php View::begin('content');?>
 	
 <div class="mdui-container-fluid">
 
-<?php if($head):?>
+<?php if ($head):?>
 <div class="mdui-typo" style="padding: 20px;">
 	<?php e($head);?>
 </div>
@@ -33,7 +34,7 @@ function file_ico($item){
 		  <div class="mdui-col-sm-3 mdui-text-right">修改时间 <i class="mdui-icon material-icons icon-sort" data-sort="date" data-order="downward">expand_more</i></div>
 		  <div class="mdui-col-sm-2 mdui-text-right">大小 <i class="mdui-icon material-icons icon-sort" data-sort="size" data-order="downward">expand_more</i></div>
 		</li>
-		<?php if($path != '/'):?>
+		<?php if ($path != '/'):?>
 		<li class="mdui-list-item mdui-ripple">
 			<a href="<?php echo get_absolute_path($root.$path.'../');?>">
 			  <div class="mdui-col-xs-12 mdui-col-sm-7">
@@ -46,8 +47,8 @@ function file_ico($item){
 		</li>
 		<?php endif;?>
 
-		<?php foreach((array)$items as $item):?>
-			<?php if(!empty($item['folder'])):?>
+		<?php foreach ((array)$items as $item):?>
+			<?php if (!empty($item['folder'])):?>
 
 		<li class="mdui-list-item mdui-ripple" data-sort data-sort-name="<?php e($item['name']);?>" data-sort-date="<?php echo $item['lastModifiedDateTime'];?>" data-sort-size="<?php echo $item['size'];?>">
 			<a href="<?php echo get_absolute_path($root.$path.rawurlencode($item['name']));?>">
@@ -56,7 +57,7 @@ function file_ico($item){
 		    	<?php e($item['name']);?>
 			  </div>
 			  <div class="mdui-col-sm-3 mdui-text-right"><?php echo date("Y-m-d H:i:s", $item['lastModifiedDateTime']);?></div>
-			  <div class="mdui-col-sm-2 mdui-text-right"><?php echo onedrive::human_filesize($item['size']);?></div>
+			  <div class="mdui-col-sm-2 mdui-text-right"><?php echo Onedrive::human_filesize($item['size']);?></div>
 		  	</a>
 		</li>
 			<?php else:?>
@@ -67,14 +68,14 @@ function file_ico($item){
 		    	<?php e($item['name']);?>
 			  </div>
 			  <div class="mdui-col-sm-3 mdui-text-right"><?php echo date("Y-m-d H:i:s", $item['lastModifiedDateTime']);?></div>
-			  <div class="mdui-col-sm-2 mdui-text-right"><?php echo onedrive::human_filesize($item['size']);?></div>
+			  <div class="mdui-col-sm-2 mdui-text-right"><?php echo Onedrive::human_filesize($item['size']);?></div>
 		  	</a>
 		</li>
 			<?php endif;?>
 		<?php endforeach;?>
 	</ul>
 </div>
-<?php if($readme):?>
+<?php if ($readme):?>
 <div class="mdui-typo mdui-shadow-3" style="padding: 20px;margin: 20px 0;">
 	<div class="mdui-chip">
 	  <span class="mdui-chip-icon"><i class="mdui-icon material-icons">face</i></span>
@@ -137,4 +138,4 @@ $(function () {
 
 });
 </script>
-<?php view::end('content');?>
+<?php View::end('content');?>

@@ -1,8 +1,8 @@
-<?php view::layout('layout')?>
+<?php View::layout('layout')?>
 <?php
-$item['thumb'] = onedrive::thumbnail($item['path']);
+$item['thumb'] = Onedrive::thumbnail($item['path']);
 ?>
-<?php view::begin('content');?>
+<?php View::begin('content');?>
 <link class="dplayer-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
 <div class="mdui-container-fluid">
 	<br>
@@ -18,7 +18,9 @@ $item['thumb'] = onedrive::thumbnail($item['path']);
 	  <textarea class="mdui-textfield-input"><video><source src="<?php e($url);?>" type="video/mp4"></video></textarea>
 	</div>
 </div>
-<?php if(pathinfo($item["name"], PATHINFO_EXTENSION) === 'flv') { e('<script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>'); } ?>
+<?php if (pathinfo($item["name"], PATHINFO_EXTENSION) === 'flv') {
+    e('<script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>');
+} ?>
 <script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
 <script>
 const dp = new DPlayer({
@@ -32,4 +34,4 @@ const dp = new DPlayer({
 });
 </script>
 <a href="<?php e($url);?>" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
-<?php view::end('content');?>
+<?php View::end('content');?>
